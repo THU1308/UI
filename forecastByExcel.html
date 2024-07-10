@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thủy điện Kon Tum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 p-6">
+    <div class="container mx-auto bg-white p-8 rounded shadow-lg">
+        <h1 class="text-2xl font-bold mb-6 text-center text-blue-800">Dự đoán lưu lượng dòng chảy của lũ tại hồ thủy điện Kon Tum vào mùa mưa</h1>
+        <div class="bg-gray-50 p-6 rounded-md border border-gray-200 shadow-md">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="totalDischarge" class="block text-sm font-medium text-gray-700">Lưu lượng mưa tại trạm Kon Plong tại thời điểm t</label>
+                    <input type="number" id="totalDischarge" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Lưu lượng mưa Kon Plong">
+                </div>
+                <div>
+                    <label for="rainfallData" class="block text-sm font-medium text-gray-700">Lưu lượng dòng chảy tại trạm Kon Plong tại thời điểm t</label>
+                    <input type="number" id="rainfallData" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Lưu lượng dòng chảy Kon Plong">
+                </div>
+                <div>
+                    <label for="inflowAnKhe" class="block text-sm font-medium text-gray-700">Lưu lượng mưa tại trạm Kon Tum tại thời điểm t</label>
+                    <input type="number" id="inflowAnKhe" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Lưu lượng mưa Kon Tum">
+                </div>
+                <div>
+                    <label for="inflowAnKhe" class="block text-sm font-medium text-gray-700">Lưu lượng dòng chảy tại trạm Kon Tum tại thời điểm t</label>
+                    <input type="number" id="inflowAnKhe" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Lưu lượng dòng chảy Kon Tum">
+                </div>
+                <div>
+                    <label for="inflowAnKhe" class="block text-sm font-medium text-gray-700">Lưu lượng mưa tại trạm Măng Cành vào thời điểm t</label>
+                    <input type="number" id="inflowAnKhe" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Lưu lượng mưa Măng Cành">
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="useExcel" class="mr-2">
+                    <label for="useExcel" class="text-sm font-medium text-gray-700">Dự đoán bằng file excel (.xlsx, .csv)</label>
+                    <input type="file" id="excelFile" class="ml-2" disabled>
+                </div>
+            </div>
+            <button class="mt-6 w-full bg-green-500 text-white font-bold py-2 rounded hover:bg-green-600">Dự đoán</button>
+        </div>
+    
+        <div class="mt-6 overflow-auto max-h-80">
+            <table class="min-w-full divide-y divide-gray-200 border border-gray-300">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">
+                            Lưu lượng mưa Măng Cành
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">
+                            Lưu lượng mưa Kon Plong
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">
+                            Lưu lượng mưa Kon Tum
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">
+                            Lưu lượng dòng chảy Kon Plong
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">
+                            Lưu lượng dòng chảy Kon Tum
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">26</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">26</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">26</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">26</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">26</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">28</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">28</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">28</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">28</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">28</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">30</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">30</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">30</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">30</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">30</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap border border-gray-300">
+                            <div class="text-sm text-gray-900">32</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        
+            
+    </div>
+
+    <script>
+        document.getElementById('useExcel').addEventListener('change', function (e) {
+            document.getElementById('excelFile').disabled = !e.target.checked;
+        });
+    </script>
+</body>
+
+</html>
