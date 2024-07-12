@@ -93,25 +93,85 @@
             }
 
             // Hàm để xử lý dữ liệu và tạo các đối tượng Record
+            // function processData(data) {
+            //     // Kiểm tra và xử lý dữ liệu
+            //     var records = [];
+            //     var validRecords = []; // Mảng chứa các bản ghi hợp lệ (4 bản ghi liền kề với khoảng cách 6 tiếng)
+            //     var invalidRecords = []; // Mảng chứa các bản ghi không hợp lệ
+
+            //     for (var i = 1; i < data.length; i = i + 4) {
+            //         var record1 = data[i];
+            //         var record2 = data[i + 1];
+            //         var record3 = data[i + 2];
+            //         var record4 = data[i + 3];
+
+            //         // Kiểm tra và bỏ qua các dòng trống
+            //         if (!isValidRow(record1) || !isValidRow(record2) || !isValidRow(record3) || !isValidRow(record4)) {
+            //             alert("Invalid file format!")
+            //             return;
+            //         }
+
+            //         // Chuyển đổi thời gian từ Excel sang đối tượng Date
+            //         var time1 = excelDateToJSDate(record1[0]);
+            //         var time2 = excelDateToJSDate(record2[0]);
+            //         var time3 = excelDateToJSDate(record3[0]);
+            //         var time4 = excelDateToJSDate(record4[0]);
+
+            //         // Tính khoảng cách thời gian giữa các bản ghi
+            //         var diff1to2 = Math.abs(time2 - time1) / (1000 * 60 * 60); // Đổi ra giờ
+            //         var diff2to3 = Math.abs(time3 - time2) / (1000 * 60 * 60); // Đổi ra giờ
+            //         var diff3to4 = Math.abs(time4 - time3) / (1000 * 60 * 60); // Đổi ra giờ
+
+            //         // Kiểm tra các bản ghi có đáp ứng yêu cầu khoảng cách 6 tiếng không
+            //         if (diff1to2 >= 6 && diff2to3 >= 6 && diff3to4 >= 6) {
+            //             // Nếu đúng yêu cầu, thêm vào mảng validRecords
+            //             validRecords.push(record1, record2, record3, record4);
+            //         } else {
+            //             // Nếu không đúng yêu cầu, thêm vào mảng invalidRecords
+            //             invalidRecords.push(record1, record2, record3, record4);
+            //         }
+
+
+            //     }
+
+            //     // Hiển thị thông báo cho các bản ghi không hợp lệ (nếu có)
+            //     if (invalidRecords.length > 0) {
+            //         alert('Invalid date file format!');
+            //         return;
+            //     }
+
+            //     // Xử lý và hiển thị các bản ghi hợp lệ
+            //     validRecords.forEach(function (record) {
+            //         var newRecord = new Record(
+            //             excelDateToJSDate(record[0]),
+            //             record[1],
+            //             record[2],
+            //             record[3],
+            //             record[4],
+            //             record[5]
+            //         );
+            //         records.push(newRecord);
+            //     });
+            //     // Hiển thị dữ liệu
+            //     displayData(records);
+            // }
             function processData(data) {
-                // Kiểm tra và xử lý dữ liệu
                 var records = [];
                 var validRecords = []; // Mảng chứa các bản ghi hợp lệ (4 bản ghi liền kề với khoảng cách 6 tiếng)
                 var invalidRecords = []; // Mảng chứa các bản ghi không hợp lệ
 
-                for (var i = 1; i < data.length; i = i + 4) {
+                for (var i = 0; i < data.length - 3; i++) {
                     var record1 = data[i];
                     var record2 = data[i + 1];
                     var record3 = data[i + 2];
                     var record4 = data[i + 3];
 
-                    // Kiểm tra và bỏ qua các dòng trống
-                    if (!isValidRow(record1) || !isValidRow(record2) || !isValidRow(record3) || !isValidRow(record4)) {
-                        alert("Invalid file format!")
-                        return;
+                    // Kiểm tra dòng trống
+                    if (!record1 || !record2 || !record3 || !record4) {
+                        continue; // Nếu có dòng trống, bỏ qua
                     }
 
-                    // Chuyển đổi thời gian từ Excel sang đối tượng Date
+                    // Chuyển đổi thời gian từ CSV sang đối tượng Date
                     var time1 = excelDateToJSDate(record1[0]);
                     var time2 = excelDateToJSDate(record2[0]);
                     var time3 = excelDateToJSDate(record3[0]);
@@ -126,18 +186,17 @@
                     if (diff1to2 >= 6 && diff2to3 >= 6 && diff3to4 >= 6) {
                         // Nếu đúng yêu cầu, thêm vào mảng validRecords
                         validRecords.push(record1, record2, record3, record4);
+                        i += 3; // Bỏ qua các bản ghi đã xử lý
                     } else {
                         // Nếu không đúng yêu cầu, thêm vào mảng invalidRecords
                         invalidRecords.push(record1, record2, record3, record4);
+                        i += 3; // Bỏ qua các bản ghi đã xử lý
                     }
-
-
                 }
 
                 // Hiển thị thông báo cho các bản ghi không hợp lệ (nếu có)
                 if (invalidRecords.length > 0) {
-                    alert('Invalid date file format!');
-                    return;
+                    alert('Invalid file format. Invalid records were ignored');
                 }
 
                 // Xử lý và hiển thị các bản ghi hợp lệ
@@ -152,9 +211,11 @@
                     );
                     records.push(newRecord);
                 });
+
                 // Hiển thị dữ liệu
                 displayData(records);
             }
+
 
 
             function isValidRow(row) {
@@ -233,8 +294,13 @@
             <input type="file" id="fileInput" accept=".csv, .xlsx" class="bg-gray-200 p-2 rounded">
         </div>
 
+        <div id="result" class="bg-sky-50 p-6 rounded-md border border-sky-200 shadow-md mt-6">
+            <h2 class="text-lg font-bold text-sky-700">Kết quả dự báo</h2>
+            <textarea id="calculatedResult" class="mt-4 p-2 border border-sky-300 rounded w-full h-32 font-extrabold" readonly>Có cái nịt</textarea>
+        </div>
+
         <!-- Vùng để hiển thị dữ liệu -->
-        <div id="dataTable" class="mt-6"></div>
+        <!-- <div id="dataTable" class="mt-6"></div> -->
     </div>
 </body>
 
