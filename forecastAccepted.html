@@ -16,7 +16,7 @@
 
 <body class="bg-gray-100 p-6">
     <div class="container mx-auto bg-white p-8 rounded shadow-lg">
-        <h1 class="text-2xl font-bold mb-6 text-center text-blue-800">Thông tin vận hành hồ thủy điện Kon Tum</h1>
+        <h1 class="text-2xl font-bold mb-6 text-center text-blue-800">Hệ thống dự báo dòng chảy của lũ tại trạm Kon Tum</h1>
         <div class="bg-gray-50 p-6 rounded-md border border-gray-200 shadow-md">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -32,7 +32,7 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="date" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
@@ -40,7 +40,7 @@
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="date" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
@@ -48,7 +48,7 @@
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="date" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
@@ -56,7 +56,7 @@
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="date" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                             <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
@@ -66,17 +66,12 @@
                     </tbody>
                 </table>
             </div>
-            <button class="mt-6 w-full bg-green-500 text-white font-bold py-2 rounded hover:bg-green-600">Dự đoán</button>
+            <button class="mt-6 w-full bg-green-400 text-white font-bold py-2 rounded hover:bg-green-600">Dự đoán</button>
         </div>
 
-        <div id="result" class="bg-green-50 p-6 rounded-md border border-green-200 shadow-md mt-6">
-            <h2 class="text-lg font-bold text-green-700">Kết quả dự báo</h2>
-            <div class="flex items-center mt-4">
-                <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
-                </svg>
-                <p id="calculatedResult" class="ml-2 text-green-700">Kết quả: 0</p>
-            </div>
+        <div id="result" class="bg-sky-50 p-6 rounded-md border border-sky-200 shadow-md mt-6">
+            <h2 class="text-lg font-bold text-sky-700">Kết quả dự báo</h2>
+            <textarea id="calculatedResult" class="mt-4 p-2 border border-sky-300 rounded w-full h-32 font-extrabold" readonly>Có cái nịt</textarea>
         </div>
     </div>
 </body>
