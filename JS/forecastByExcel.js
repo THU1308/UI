@@ -6,8 +6,8 @@ $(document).ready(function () {
             header: true,
             dynamicTyping: true,
             complete: function (results) {
-                console.log(results.data.filter((row) => row.length > 0));
-                processData(results.data.filter((row) => row.length > 0));
+                console.log(results.data);
+                processData(results.data);
             },
         });
     }
@@ -20,8 +20,8 @@ $(document).ready(function () {
             var workbook = XLSX.read(data, { type: "array" });
             var firstSheet = workbook.Sheets[workbook.SheetNames[0]];
             var jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
-            console.log(jsonData.filter((row) => row.length > 0));
-            processData(jsonData.filter((row) => row.length > 0));
+            console.log(jsonData);
+            processData(jsonData);
         };
         reader.readAsArrayBuffer(file);
     }
@@ -95,45 +95,58 @@ $(document).ready(function () {
             row[5]);
     }
 
-    // Hàm để xử lý dữ liệu và tạo các đối tượng Record
-    function processData(data) {
-        // Kiểm tra và xử lý dữ liệu
-        var records = [];
-        var validRecords = []; // Mảng chứa các bản ghi hợp lệ (4 bản ghi liền kề với khoảng cách 6 tiếng)
-        var invalidRecords = []; // Mảng chứa các bản ghi không hợp lệ
-
-        for (var i = 1; i < data.length; i = i + 4) {
-            var record1 = excelRowToRecord(data[i]);
-            var record2 = excelRowToRecord(data[i + 1]);
-            var record3 = excelRowToRecord(data[i + 2]);
-            var record4 = excelRowToRecord(data[i + 3]);
-
-            // Kiểm tra và bỏ qua các dòng trống
-            if (
-                !isValidRow(record1) ||
-                !isValidRow(record2) ||
-                !isValidRow(record3) ||
-                !isValidRow(record4)
-            ) {
-                alert("Dữ liệu trong file chưa đúng định dạng!Xem chi tiết trong Errors/invalid_records.xlsx");
-                invalidRecords.push(record1, record2, record3, record4);
-                writeInvalidRecordsToFile(invalidRecords);
-                return;
-            }
-
-            if (checkTime(record1, record2, record3, record4)) {
-                validRecords.push(record1, record2, record3, record4);
+    // Hàm để tách dữ liệu thành các khoảng dựa vào các dòng trống
+    function splitData(data) {
+        var segments = [];
+        var segment = [];
+        for (var i = 1; i < data.length; i++) { // Bắt đầu từ 1 để bỏ qua tiêu đề
+            if (data[i].length === 0) {
+                if (segment.length > 0) {
+                    segments.push(segment);
+                    segment = [];
+                }
             } else {
-                invalidRecords.push(record1, record2, record3, record4);
+                segment.push(data[i]);
             }
         }
+        if (segment.length > 0) {
+            segments.push(segment);
+        }
+        return segments;
+    }
+
+    // Hàm để xử lý dữ liệu và tạo các đối tượng Record
+    function processData(data) {
+        var records = [];
+        var validRecords = [];
+        var invalidRecords = [];
+        var segments = splitData(data);
+
+        segments.forEach(function (segment) {
+            for (var i = 0; i <= segment.length - 4; i++) {
+                var record1 = excelRowToRecord(segment[i]);
+                var record2 = excelRowToRecord(segment[i + 1]);
+                var record3 = excelRowToRecord(segment[i + 2]);
+                var record4 = excelRowToRecord(segment[i + 3]);
+
+                // Kiểm tra và bỏ qua các dòng không hợp lệ
+                if (!isValidRow(record1) || !isValidRow(record2) || !isValidRow(record3) || !isValidRow(record4)) {
+                    invalidRecords.push(record1, record2, record3, record4);
+                    continue;
+                }
+
+                if (checkTime(record1, record2, record3, record4)) {
+                    validRecords.push(record1, record2, record3, record4);
+                } else {
+                    invalidRecords.push(record1, record2, record3, record4);
+                }
+            }
+        });
+
         // Hiển thị thông báo cho các bản ghi không hợp lệ (nếu có)
         if (invalidRecords.length > 0) {
             writeInvalidRecordsToFile(invalidRecords);
-            alert(
-                "Dữ liệu trong file chưa đúng định dạng!Xem chi tiết trong Errors/invalid_records.xlsx"
-            );
-            return;
+            alert("Dữ liệu trong file chưa đúng định dạng! Xem chi tiết trong Errors/invalid_records.xlsx");
         }
 
         // Xử lý và hiển thị các bản ghi hợp lệ
@@ -148,8 +161,6 @@ $(document).ready(function () {
             );
             records.push(newRecord);
         });
-        // Hiển thị dữ liệu
-        displayData(records);
     }
 
 
@@ -166,7 +177,7 @@ $(document).ready(function () {
         var diff3to4 = Math.abs(time4 - time3) / (1000 * 60 * 60); // Đổi ra giờ
 
         // Kiểm tra các bản ghi có đáp ứng yêu cầu khoảng cách 6 tiếng không
-        return (diff1to2 >= 6 && diff2to3 >= 6 && diff3to4 >= 6);
+        return (diff1to2 == 6 && diff2to3 == 6 && diff3to4 == 6);
     }
 
     function isValidRow(row) {

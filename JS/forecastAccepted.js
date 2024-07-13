@@ -20,7 +20,7 @@ $(document).ready(function () {
 
             // Kiểm tra không được để trống trường dữ liệu nào
             if (!timeValue || !konPlongLuongMua || !konTumLuongMua || !mangCanhLuongMua || !konPlongDongChay || !konTumDongChay) {
-                alert(`Hàng ${index + 1} có trường dữ liệu bị thiếu.`);
+                alert(`Mẫu dữ liệu ${index + 1} có trường dữ liệu bị thiếu.`);
                 canSubmit = false;
                 return false; // Dừng vòng lặp nếu có trường dữ liệu thiếu
             }
@@ -28,7 +28,7 @@ $(document).ready(function () {
             // Kiểm tra số không được âm
             if (parseFloat(konPlongLuongMua) < 0 || parseFloat(konTumLuongMua) < 0 || parseFloat(mangCanhLuongMua) < 0 ||
                 parseFloat(konPlongDongChay) < 0 || parseFloat(konTumDongChay) < 0) {
-                alert(`Hàng ${index + 1} có số âm.`);
+                alert(`Mẫu dữ liệu ${index + 1} có dữ liệu bị âm.`);
                 canSubmit = false;
                 return false; // Dừng vòng lặp nếu có số âm
             }
@@ -39,8 +39,8 @@ $(document).ready(function () {
                 let currentTime = new Date(timeValue);
                 let timeDiff = Math.abs(currentTime - prevTime) / 36e5; // Chuyển đổi ra giờ
 
-                if (timeDiff < 6) {
-                    alert(`Thời gian của hàng ${index + 1} cách thời gian hàng ${index} ít hơn 6 tiếng.`);
+                if (timeDiff !== 6) {
+                    alert(`Hai mẫu dữ liệu liền nhau phải cách nhau 6 tiếng.`);
                     canSubmit = false;
                     return false; // Dừng vòng lặp nếu thời gian cách nhau ít hơn 6 tiếng
                 }
