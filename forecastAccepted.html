@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thủy điện Kon Tum</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./JS/forecastAccepted.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <style>
         body {
@@ -16,64 +18,105 @@
 
 <body class="bg-gray-100 p-6">
     <div class="container mx-auto bg-white p-8 rounded shadow-lg">
-        <h1 class="text-2xl font-bold mb-6 text-center text-blue-800">Hệ thống dự báo dòng chảy của lũ tại trạm Kon Tum</h1>
+        <h1 class="text-2xl font-bold mb-6 text-center text-blue-800">Hệ thống dự báo dòng chảy của lũ tại trạm Kon Tum
+        </h1>
         <div class="bg-gray-50 p-6 rounded-md border border-gray-200 shadow-md">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Time</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Lưu lượng mưa Kon Plong</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Lưu lượng mưa Kon Tum</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Lưu lượng mưa Măng Cành</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Dòng chảy Kon Plong</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Dòng chảy Kon Tum</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                Time</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                Lưu lượng mưa Kon Plong</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                Lưu lượng mưa Kon Tum</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                Lưu lượng mưa Măng Cành</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                Dòng chảy Kon Plong</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                Dòng chảy Kon Tum</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local" class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><input type="number" class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="datetime-local"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><input type="number"
+                                    class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Dữ liệu"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <button class="mt-6 w-full bg-green-400 text-white font-bold py-2 rounded hover:bg-green-600">Dự đoán</button>
+            <button
+                class="get-data-btn mt-6 w-full bg-green-400 text-white font-bold py-2 rounded hover:bg-green-600">Dự
+                đoán</button>
         </div>
 
         <div id="result" class="bg-sky-50 p-6 rounded-md border border-sky-200 shadow-md mt-6">
             <h2 class="text-lg font-bold text-sky-700">Kết quả dự báo</h2>
-            <textarea id="calculatedResult" class="mt-4 p-2 border border-sky-300 rounded w-full h-32 font-extrabold" readonly>Có cái nịt</textarea>
+            <textarea id="calculatedResult" class="mt-4 p-2 border border-sky-300 rounded w-full h-32 font-extrabold"
+                readonly>Có cái nịt</textarea>
         </div>
     </div>
 </body>
+
 
 </html>
