@@ -197,25 +197,25 @@ $(document).ready(function () {
     }
 
     // Hàm để hiển thị dữ liệu lên trang web
-    function displayData(records) {
-        var table =
-            '<div class="max-h-96 overflow-auto"><table class="table-auto w-full text-left">';
-        table += "<thead><tr>";
-        table += '<th class="px-4 py-2">Time</th>';
-        table += '<th class="px-4 py-2">KonPlong_luongmua</th>';
-        table += '<th class="px-4 py-2">KonTum_luongmua</th>';
-        table += '<th class="px-4 py-2">Mang Canh_luongmua</th>';
-        table += '<th class="px-4 py-2">KonPlong_dongchay</th>';
-        table += '<th class="px-4 py-2">KonTum_dongchay</th>';
-        table += "</tr></thead><tbody>";
+    // function displayData(records) {
+    //     var table =
+    //         '<div class="max-h-96 overflow-auto"><table class="table-auto w-full text-left">';
+    //     table += "<thead><tr>";
+    //     table += '<th class="px-4 py-2">Time</th>';
+    //     table += '<th class="px-4 py-2">KonPlong_luongmua</th>';
+    //     table += '<th class="px-4 py-2">KonTum_luongmua</th>';
+    //     table += '<th class="px-4 py-2">Mang Canh_luongmua</th>';
+    //     table += '<th class="px-4 py-2">KonPlong_dongchay</th>';
+    //     table += '<th class="px-4 py-2">KonTum_dongchay</th>';
+    //     table += "</tr></thead><tbody>";
 
-        for (var i = 0; i < records.length; i++) {
-            table += records[i].display();
-        }
+    //     for (var i = 0; i < records.length; i++) {
+    //         table += records[i].display();
+    //     }
 
-        table += "</tbody></table></div>";
-        $("#dataTable").html(table);
-    }
+    //     table += "</tbody></table></div>";
+    //     $("#dataTable").html(table);
+    // }
 
     // Xử lý sự kiện khi chọn file
     $("#fileInput").change(function (event) {

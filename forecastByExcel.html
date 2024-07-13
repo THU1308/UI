@@ -20,8 +20,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   <script src="./JS/forecastByExcel.js"></script>
-  
+
 </head>
+
 <body class="bg-gray-100 p-6">
   <div class="container mx-auto bg-white p-8 rounded shadow-lg">
     <h1 class="text-2xl font-bold mb-6 text-center text-blue-800">
@@ -45,8 +46,15 @@
       <input type="file" id="fileInput" accept=".csv, .xlsx" class="bg-gray-200 p-2 rounded" />
     </div>
 
+    <div id="result" class="bg-sky-50 p-6 rounded-md border border-sky-200 shadow-md mt-6">
+      <h2 class="text-lg font-bold text-sky-700">Kết quả dự báo</h2>
+      <textarea id="calculatedResult" class="mt-4 p-2 border border-sky-300 rounded w-full h-32 font-extrabold"
+        readonly>Có cái nịt</textarea>
+    </div>
+
+
     <!-- Vùng để hiển thị dữ liệu -->
-    <div id="dataTable" class="mt-6"></div>
+    <!-- <div id="dataTable" class="mt-6"></div> -->
   </div>
 </body>
 
